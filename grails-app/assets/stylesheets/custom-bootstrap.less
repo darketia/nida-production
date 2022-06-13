@@ -1,0 +1,28 @@
+@import "bootstrap.less";
+
+// Button sizes
+// -------------------------
+.button-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
+  padding: 3px @padding-horizontal;
+  font-size: @font-size;
+  line-height: @line-height;
+  border-radius: @border-radius;
+}
+@navbar-inverse-color: white;
+@navbar-inverse-link-color: white;
+@navbar-inverse-bg: #00854A;
+@navbar-height: 40px;
+@navbar-default-brand-hover-color:  rgb(237, 237, 237);
+@navbar-default-link-hover-color: black;
+@link-hover-color: black;
+
+@line-height-base:        1.428571429; // 20/14
+@table-cell-padding:          6px;
+@input-height-base: 30px;
+
+@alert-padding: 5px;
+
+body { padding-top: 60px; }
+@media screen and (max-width: 768px) {
+  body { padding-top: 100px; }
+}

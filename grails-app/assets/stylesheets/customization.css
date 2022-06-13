@@ -1,0 +1,187 @@
+.booleanTrue:before {
+    vertical-align: top;
+    content: url(../images/SSS/icons/true.png)
+}
+
+.booleanFalse:before {
+    vertical-align: top;
+    content: url(../images/SSS/icons/false.png)
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.cell {
+    float: left;
+    padding-right: 3px;
+}
+
+/*. Class สำหรับแสดงเมนูทั้งหมด */
+.menuLightBlue {
+    background-color: #add8e6 !important;
+    background-image: none !important;
+    padding: 3px 60px 3px 10px !important;
+    width: 100%;
+!important;
+}
+
+.input-daterange {
+    vertical-align: middle !important;
+    display: inline-table !important;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.show-label {
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.input-daterange .input-group-addon {
+    padding: 4px 12px;
+}
+
+.ms-container {
+    width: 100% !important;
+}
+
+.search-input {
+    border-radius: 4px 4px 0px 0px !important;
+    border-bottom: 0px;
+    width: 100%;
+}
+
+.search-input + .ms-list {
+    border-radius: 0px 0px 4px 4px !important;
+}
+
+.ui-widget-header {
+
+}
+
+.autocomplete-input div:first-child input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.autocomplete-input div:last-child input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.vertical-middle {
+    vertical-align: middle !important;
+}
+
+.bootstrap-filestyle span label {
+    height: 30px;
+    margin-right: 0
+}
+
+select.select2 {
+    display: block !important;
+    visibility: visible;
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 4px;
+    width: 190px;
+    height: 20px;
+}
+
+.select2.required .select2-selection {
+    background: #fff3f3;
+    border-color: #ffaaaa;
+}
+
+.select2.required .select2-selection__placeholder {
+    color: #cc0000 !important;
+}
+
+.dropdown-menu-large {
+    margin-left: 16px;
+    margin-right: 16px;
+    padding: 20px 0px;
+}
+
+.dropdown-menu-large > li > ul {
+    padding: 0;
+    margin: 0;
+    width: 350px;
+}
+
+.dropdown-menu-large > li > ul > li {
+    list-style: none;
+    white-space: nowrap;
+}
+
+.dropdown-menu-large > li > ul > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #333333;
+}
+
+.dropdown-menu-large > li ul > li > a:hover,
+.dropdown-menu-large > li ul > li > a:focus {
+    text-decoration: none;
+    color: #262626;
+    background-color: #f5f5f5;
+}
+
+.dropdown-menu-large .disabled > a,
+.dropdown-menu-large .disabled > a:hover,
+.dropdown-menu-large .disabled > a:focus {
+    color: #999999;
+}
+
+.dropdown-menu-large .disabled > a:hover,
+.dropdown-menu-large .disabled > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    background-image: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    cursor: not-allowed;
+}
+
+.dropdown-menu-large .dropdown-header {
+    color: #428bca;
+    font-size: 18px;
+}
+
+.dl-show dt {
+    height: 35px !important;
+}
+
+.form-control {
+    height: 35px;
+}
+
+.table td, .table th{
+    vertical-align: middle!important;
+}
+
+.panel-body .table {
+    margin-bottom: 0;
+}
+
+.btn{
+    height: 35px;
+}
+a.btn{
+    padding-top:8px;
+}

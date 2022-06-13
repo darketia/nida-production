@@ -1,0 +1,33 @@
+dataSource {
+  pooled = true
+  driverClassName = "org.postgresql.Driver"
+  configClass = org.grails.plugin.hibernate.filter.HibernateFilterDomainConfiguration
+}
+hibernate {
+  cache.use_second_level_cache = true
+  cache.use_query_cache = true
+  cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory'
+  show_sql = false
+  order_inserts = true
+  order_updates = true
+  jdbc.batch_size = 30
+  jdbc.batch_versioned_data = true
+  dialect = "org.hibernate.dialect.PostgreSQLDialect"
+}
+// environment specific settings
+environments {
+  development {
+    dataSource {
+      username = "postgres"
+      password = "1234"
+      dbCreate = "update" // one of 'create', 'create-drop','update'
+      url = "jdbc:postgresql://localhost/nida-production?autoReconnect=true"
+
+    }
+  }
+
+  test {
+  }
+  production {
+  }
+}

@@ -1,0 +1,109 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require main
+*= require mobile
+*= require_self
+*= require bootstrap
+*= require jquery-ui-1.11.2.custom/jquery-ui
+*= require jquery-ui-1.11.2.custom/jquery-ui.theme
+*= require jquery-ui-1.11.2.custom/jquery-ui.structure
+*= require select2/css/select2
+*= require multi-select/css/multi-select
+*= require autocomplete/css/autocomplete
+*= require bootstrap-datetimepicker-master/css/bootstrap-datetimepicker
+*= require custom-bootstrap
+*/
+
+.navbar-inverse {
+    border: 0px !important;
+}
+
+.navbar-right {
+    margin-right: 0px !important;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: rgba(129, 180, 223, 0.74) !important;
+    color: black !important;
+}
+
+.navbar-default .navbar-header .navbar-brand:hover, .navbar-default .navbar-header .navbar-brand:focus {
+    color: #777 !important;
+    text-decoration: underline;
+}
+
+nav .navbar-brand {
+    border-right: 1px solid #e7e7e7 !important;
+    background-color: rgb(237, 237, 237) !important;
+    font-weight: 700;
+    font-style: inherit;
+    text-decoration: underline;
+}
+
+.navbar-logo {
+    padding-top: 6px;
+    padding-right: 5px;
+    float: left;
+    height: 50px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.dl-show dt {
+    width: 360px !important;
+}
+
+.dl-show dd {
+    margin-left: 380px !important;
+}
+
+.dl-show dd ul {
+    margin-left: 16px;
+}
+
+.panel-title {
+    font-weight: 600 !important;
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.container {
+    width: 100% !important;
+}
+
+.navbar-right .dropdown-menu {
+    width: 100%;
+}
+
+.user-settings {
+    text-decoration: underline !important;
+}
+
+header .container a{
+    line-height: 26px !important;
+}
+
+.form-horizontal .control-label {
+    padding-top: 7px !important;
+}
+.form-horizontal {
+    margin-bottom: 20px !important;
+}
+
+.autocomplete-input div {
+    padding: 0px !important;
+}
+
+.alert{
+    margin-bottom: 10px !important;
+}

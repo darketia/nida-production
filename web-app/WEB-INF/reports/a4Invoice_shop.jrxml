@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="a4invoice_shop" language="groovy" pageWidth="595" pageHeight="842" columnWidth="525" leftMargin="35" rightMargin="35" topMargin="35" bottomMargin="35">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="underline">
+		<box>
+			<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+		</box>
+	</style>
+	<subDataset name="details">
+		<parameter name="amount" class="java.math.BigDecimal"/>
+		<parameter name="receiveAmount" class="java.math.BigDecimal"/>
+		<field name="productName" class="java.lang.String"/>
+		<field name="qty" class="java.math.BigDecimal"/>
+		<field name="amount" class="java.math.BigDecimal"/>
+		<field name="pricePerUnit" class="java.math.BigDecimal"/>
+		<field name="uom" class="java.lang.String"/>
+		<variable name="sumAmount" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{amount}]]></variableExpression>
+		</variable>
+		<variable name="sumAmountInPage" class="java.math.BigDecimal" resetType="Group" resetGroup="group1" calculation="Sum">
+			<variableExpression><![CDATA[$F{amount}]]></variableExpression>
+		</variable>
+		<group name="group1">
+			<groupExpression><![CDATA[$V{PAGE_NUMBER}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="saleOrderId" class="java.lang.Long"/>
+	<parameter name="details" class="java.util.Collection" isForPrompting="false"/>
+	<parameter name="taxNo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<parameter name="amount" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="printDate" class="java.lang.String"/>
+	<parameter name="priceType" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select so.id
+  , so.code
+  , cust.code custCode
+  , so.name custName
+  , so.tel_no custTelNo
+  , so.address custAddress
+  , so.date
+  , u.first_name +' '+ u.last_name cashier
+  , so.receive_amount receiveAmount
+  , so.remark
+from sale_order so
+	join customer cust on cust.id=so.customer_id
+	join sec_user u on u.id=so.creator_id
+where so.id = $P{saleOrderId}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="code" class="java.lang.String"/>
+	<field name="custCode" class="java.lang.String"/>
+	<field name="custName" class="java.lang.String"/>
+	<field name="custTelNo" class="java.lang.String"/>
+	<field name="custAddress" class="java.lang.String"/>
+	<field name="date" class="java.sql.Date"/>
+	<field name="cashier" class="java.lang.String"/>
+	<field name="receiveAmount" class="java.math.BigDecimal"/>
+	<field name="remark" class="java.lang.String"/>
+	<pageHeader>
+		<band height="162">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="0" y="90" width="71" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["รหัสลูกค้า :"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="300" y="122" width="74" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ผู้ขาย :"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="71" y="28" width="147" height="14" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["(044)-399939"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="237" y="0" width="50" height="50" forecolor="#000000"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logoPath}]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="71" y="138" width="229" height="16" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{custAddress}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="71" y="14" width="147" height="14" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["(044)-399916"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="71" y="122" width="229" height="16" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{custTelNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="0" y="28" width="71" height="14" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["โทรสาร :"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="71" y="90" width="229" height="16" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{custCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="300" y="42" width="226" height="14" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ต. หนองพลวง อ. จักราช จ. นครราชสีมา"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="71" y="0" width="147" height="14" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["(044)-399825"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="374" y="90" width="151" height="16" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Transparent" x="0" y="138" width="71" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ที่อยู่ :"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="300" y="90" width="74" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["เลขที่ :"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="374" y="106" width="151" height="16" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{printDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="374" y="138" width="151" height="16" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{priceType}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="300" y="106" width="74" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["วันที่ :"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="300" y="138" width="74" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ประเภท :"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="71" y="106" width="229" height="16" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{custName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="0" width="71" height="14" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["โทรศัพท์ :"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="0" y="106" width="71" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ชื่อลูกค้า :"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="0" y="122" width="71" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["โทร :"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="300" y="28" width="226" height="14" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["สามแยกหนองพลวง (ตรงข้ามป้อมตำรวจ)"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="416" y="0" width="110" height="20" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Tahoma" size="14" isBold="true"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ร้านค้า"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="374" y="122" width="151" height="16" forecolor="#000000"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cashier}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="-1" y="62" width="525" height="1" forecolor="#000000"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="171" y="70" width="182" height="20" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ใบเสนอราคา"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="84" splitType="Stretch">
+			<elementGroup/>
+			<componentElement>
+				<reportElement key="table 1" positionType="Float" x="0" y="0" width="525" height="70"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="details">
+						<datasetParameter name="amount">
+							<datasetParameterExpression><![CDATA[$P{amount}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="receiveAmount">
+							<datasetParameterExpression><![CDATA[$F{receiveAmount}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{details})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="41">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="41" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+								</textElement>
+								<text><![CDATA[ลำดับ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="41" height="20"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{REPORT_COUNT}+"."]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="196">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="196" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<text><![CDATA[ชื่อสินค้า]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="196" height="20"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{productName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="105">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="105" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<text><![CDATA[จำนวน]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="#,##0.##" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="40" height="20"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{qty}]]></textFieldExpression>
+							</textField>
+							<textField isBlankWhenNull="true">
+								<reportElement x="40" y="0" width="65" height="20"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{uom}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="75">
+						<jr:tableFooter style="table 1_CH" height="90" rowSpan="1">
+							<staticText>
+								<reportElement style="table 1_CH" x="0" y="0" width="75" height="30" backcolor="#FFFFCC"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Tahoma" isBold="true"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<text><![CDATA[ยอดรวม]]></text>
+							</staticText>
+							<staticText>
+								<reportElement style="table 1_CH" x="0" y="30" width="75" height="30"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Tahoma" isBold="true"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<text><![CDATA[รับเงิน]]></text>
+							</staticText>
+							<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+								<reportElement style="table 1_CH" x="0" y="60" width="75" height="30" forecolor="#000000"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+									<font fontName="Tahoma" isBold="true"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$P{receiveAmount} >= $P{amount} ? "ทอนเงิน":"<span style=\"color:red\">ค้างจ่าย</span>"]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="75" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<text><![CDATA[ราคา/หน่วย]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="75" height="20"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{pricePerUnit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="107">
+						<jr:tableFooter style="table 1_CH" height="90" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+								<reportElement style="table 1_CH" x="0" y="0" width="107" height="30" backcolor="#FFFFCC"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Tahoma" isBold="true"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{amount}]]></textFieldExpression>
+							</textField>
+							<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+								<reportElement style="table 1_CH" x="0" y="30" width="107" height="30"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Tahoma" isBold="true"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{receiveAmount}]]></textFieldExpression>
+							</textField>
+							<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+								<reportElement style="table 1_CH" x="0" y="60" width="107" height="30" forecolor="#000000">
+									<printWhenExpression><![CDATA[$P{receiveAmount} >= $P{amount}]]></printWhenExpression>
+								</reportElement>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Tahoma" isBold="true"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.math.BigDecimal"><![CDATA[Math.abs($P{receiveAmount} -$P{amount})]]></textFieldExpression>
+							</textField>
+							<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+								<reportElement style="table 1_CH" x="0" y="60" width="107" height="30" forecolor="#FF0000">
+									<printWhenExpression><![CDATA[$P{receiveAmount} < $P{amount}]]></printWhenExpression>
+								</reportElement>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Tahoma" isBold="true"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.math.BigDecimal"><![CDATA[Math.abs($P{receiveAmount} -$P{amount})]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="107" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<text><![CDATA[จำนวนเงิน (บาท)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="107" height="20"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Tahoma" size="12"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{amount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="0" y="70" width="59" height="14"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["หมายเหตุ :"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="59" y="70" width="467" height="14"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{remark}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="86">
+			<textField isBlankWhenNull="true">
+				<reportElement style="underline" positionType="Float" mode="Transparent" x="20" y="42" width="145" height="14"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="524" y="9" width="1" height="61"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" mode="Transparent" x="0" y="8" width="263" height="23"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="5" rightIndent="5" spacingBefore="5" spacingAfter="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ได้รับของตามรายการไว้ในสภาพดีและถูกต้องแล้ว"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="263" y="8" width="1" height="62"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement positionType="Float" mode="Transparent" x="165" y="42" width="60" height="16"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ผู้รับสินค้า"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="underline" positionType="Float" mode="Transparent" x="287" y="42" width="145" height="16"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="0" y="8" width="525" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="69" width="525" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement positionType="Float" mode="Transparent" x="432" y="42" width="60" height="16"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ผู้ส่งสินค้า"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="0" y="9" width="1" height="61"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement positionType="Float" mode="Transparent" x="0" y="72" width="525" height="14"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["เปิดทุกวัน 7:00 น. - 17:00 น. ปิดวันอาทิตย์"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Transparent" x="0" y="72" width="263" height="14"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["เปิดทุกวัน 7:00 น. - 17:00 น. ปิดวันอาทิตย์"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
